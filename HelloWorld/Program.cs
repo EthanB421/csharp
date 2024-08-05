@@ -1,98 +1,83 @@
-﻿using System;
-using System.Data;
-using Dapper;
-using Microsoft.Data.SqlClient;
-using HelloWorld.Models;
-using HelloWorld.Data;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-namespace HelloWorld
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            IConfiguration config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
+﻿// using System;
+// using System.Data;
+// using Dapper;
+// using Microsoft.Data.SqlClient;
+// using HelloWorld.Models;
+// using HelloWorld.Data;
+// using Microsoft.Extensions.Configuration;
+// using Microsoft.EntityFrameworkCore;
+// using System.Text.Json;
+// using Newtonsoft.Json;
+// namespace HelloWorld
+// {
+//     public class Program
+//     {
+//         public static void Main(string[] args)
+//         {
 
-            DapperModel queryObj = new DapperModel(config);
-            EFModel entityObj = new EFModel(config);
+//             IConfiguration config = new ConfigurationBuilder()
+//                 .AddJsonFile("appsettings.json")
+//                 .Build();
 
-            Computer myComputer = new Computer()
-            {
-                Motherboard = "entity",
-                hasWifi = true,
-                hasLTE = false,
-                releaseDate = DateTime.Now,
-                price = 10.23m,
-                videocard = "RTX 12340124"
-            };
+//             DapperModel dapper = new DapperModel(config);
 
-            entityObj.Add(myComputer);
-            entityObj.SaveChanges();
+//             // string sql = @"INSERT INTO TutorialAppSchema.computer (
+//             //                 Motherboard ,
+//             //                 hasWifi,
+//             //                 hasLTE ,
+//             //                 releaseDate,
+//             //                 price ,
+//             //                 videocard
+//             //                 ) VALUES ('" + myComputer.Motherboard
+//             //                             + "','"+ myComputer.hasWifi
+//             //                             + "','"+ myComputer.hasLTE
+//             //                             + "','"+ myComputer.releaseDate
+//             //                             + "','"+ myComputer.price
+//             //                             + "','"+ myComputer.videocard
+//             //                         + "')";
+//             // File.WriteAllText("log.txt", sql);
+//             string computersJson = File.ReadAllText("Computers.json");
 
-        //     string sql = @"INSERT INTO TutorialAppSchema.computer (
-        //                     Motherboard ,
-        //                     hasWifi,
-        //                     hasLTE ,
-        //                     releaseDate,
-        //                     price ,
-        //                     videocard
-        //                     ) VALUES ('" + myComputer.Motherboard
-        //                                 + "','"+ myComputer.hasWifi
-        //                                 + "','"+ myComputer.hasLTE
-        //                                 + "','"+ myComputer.releaseDate
-        //                                 + "','"+ myComputer.price
-        //                                 + "','"+ myComputer.videocard
-        //                             + "')";
+//             // JsonSerializerOptions options = new JsonSerializerOptions()
+//             // {
+//             //     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+//             // };
 
-        //    int result = queryObj.ExecuteSql(sql);
-        //    Console.WriteLine(result);
+//             IEnumerable<Computer> computers = JsonConvert.DeserializeObject<IEnumerable<Computer>>(computersJson);
+//             // IEnumerable<Computer> computers = JsonSerializer.Deserialize<IEnumerable<Computer>>(computersJson, options);
 
-           string sqlSelect = @"SELECT                             
-                            Motherboard ,
-                            hasWifi,
-                            hasLTE ,
-                            releaseDate,
-                            price ,
-                            videocard
-                        FROM TutorialAppSchema.Computer";
+//             if (computers != null)
+//             {
+//                 foreach(Computer computer in computers)
+//                 {
+//                     string sql = @"INSERT INTO TutorialAppSchema.computer (
+//                             Motherboard ,
+//                             hasWifi,
+//                             hasLTE ,
+//                             releaseDate,
+//                             price ,
+//                             videocard
+//                             ) VALUES ('" + escapeSingleQuote(computer.Motherboard)
+//                                         + "','"+ computer.hasWifi
+//                                         + "','"+ computer.hasLTE
+//                                         + "','"+ computer.releaseDate
+//                                         + "','"+ computer.price
+//                                         + "','"+ escapeSingleQuote(computer.videocard)
+//                                     + "')";
+                    
+//                     dapper.ExecuteSql(sql);
+//                 }
+//             }
 
-            IEnumerable<Computer> computers = queryObj.LoadData<Computer>(sqlSelect);
-        
-            foreach(Computer computer in computers)
-            {
-                Console.WriteLine("'" + computer.Motherboard
-                                        + "','"+ computer.hasWifi
-                                        + "','"+ computer.hasLTE
-                                        + "','"+ computer.releaseDate
-                                        + "','"+ computer.price
-                                        + "','"+ computer.videocard
-                                    + "'");
+//             string computersCopy = JsonConvert.SerializeObject(computers);
+//             File.WriteAllText("comp.txt", computersCopy);
+//         }
 
-                Console.WriteLine("Motherboard hasWifi hasLTE releaseDate price videocard ");
-            }
+//         static string escapeSingleQuote(string input)
+//         {
+//             string output = input.Replace("'", "''");
 
-            //ENTITY FRAMEWORK CALL TO DB
-            IEnumerable<Computer> computersEF = entityObj.computer?.ToList<Computer>();
-
-            if(computersEF != null)
-            {
-            foreach(Computer computer in computersEF)
-            {
-                Console.WriteLine("'" + computer.Motherboard
-                                        + "','"+ computer.hasWifi
-                                        + "','"+ computer.hasLTE
-                                        + "','"+ computer.releaseDate
-                                        + "','"+ computer.price
-                                        + "','"+ computer.videocard
-                                    + "'");
-
-                Console.WriteLine("Motherboard hasWifi hasLTE releaseDate price videocard ");
-            }
-            };
-
-        }
-    }
-}
+//             return output;
+//         }
+//     }
+// }

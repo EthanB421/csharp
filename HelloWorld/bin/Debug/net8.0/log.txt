@@ -1,0 +1,15 @@
+INSERT INTO TutorialAppSchema.computer (
+                            Motherboard ,
+                            hasWifi,
+                            hasLTE ,
+                            releaseDate,
+                            price ,
+                            videocard
+                            ) VALUES ('entity','True','False','7/30/2024 2:18:21 PM','10.23','RTX 12340124')INSERT INTO TutorialAppSchema.computer (
+                            Motherboard ,
+                            hasWifi,
+                            hasLTE ,
+                            releaseDate,
+                            price ,
+                            videocard
+                            ) VALUES ('entity','True','False','7/30/2024 2:20:11 PM','10.23','RTX 12340124')
