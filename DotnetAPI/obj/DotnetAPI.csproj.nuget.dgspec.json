@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ethanbautista/Documents/C#/csharp/DotnetAPI/DotnetAPI.csproj": {}
+    "C:\\Users\\Ethan\\Documents\\C#\\DotnetAPI\\DotnetAPI.csproj": {}
   },
   "projects": {
-    "/Users/ethanbautista/Documents/C#/csharp/DotnetAPI/DotnetAPI.csproj": {
+    "C:\\Users\\Ethan\\Documents\\C#\\DotnetAPI\\DotnetAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ethanbautista/Documents/C#/csharp/DotnetAPI/DotnetAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Documents\\C#\\DotnetAPI\\DotnetAPI.csproj",
         "projectName": "DotnetAPI",
-        "projectPath": "/Users/ethanbautista/Documents/C#/csharp/DotnetAPI/DotnetAPI.csproj",
-        "packagesPath": "/Users/ethanbautista/.nuget/packages/",
-        "outputPath": "/Users/ethanbautista/Documents/C#/csharp/DotnetAPI/obj/",
+        "projectPath": "C:\\Users\\Ethan\\Documents\\C#\\DotnetAPI\\DotnetAPI.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Documents\\C#\\DotnetAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ethanbautista/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -51,6 +51,18 @@
               "target": "Package",
               "version": "[5.2.1, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -83,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

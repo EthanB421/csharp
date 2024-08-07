@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ethanbautista/Documents/C#/csharp/HelloWorld/HelloWorld.csproj": {}
+    "C:\\Users\\Ethan\\Documents\\C#\\HelloWorld\\HelloWorld.csproj": {}
   },
   "projects": {
-    "/Users/ethanbautista/Documents/C#/csharp/HelloWorld/HelloWorld.csproj": {
+    "C:\\Users\\Ethan\\Documents\\C#\\HelloWorld\\HelloWorld.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ethanbautista/Documents/C#/csharp/HelloWorld/HelloWorld.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Documents\\C#\\HelloWorld\\HelloWorld.csproj",
         "projectName": "HelloWorld",
-        "projectPath": "/Users/ethanbautista/Documents/C#/csharp/HelloWorld/HelloWorld.csproj",
-        "packagesPath": "/Users/ethanbautista/.nuget/packages/",
-        "outputPath": "/Users/ethanbautista/Documents/C#/csharp/HelloWorld/obj/",
+        "projectPath": "C:\\Users\\Ethan\\Documents\\C#\\HelloWorld\\HelloWorld.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Documents\\C#\\HelloWorld\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ethanbautista/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -88,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
