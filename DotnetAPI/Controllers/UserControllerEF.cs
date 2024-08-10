@@ -11,11 +11,11 @@ namespace DotnetAPI.Controllers;
 [Route("[controller]")]
 public class UserControllerEF : ControllerBase
 {
-    DataContextEF _ef;
+    IUserRepository _userRepo;
     IMapper _mapper;
-    public UserControllerEF(IConfiguration config)
+    public UserControllerEF(IConfiguration config, IUserRepository userRepository)
     {
-        _ef = new DataContextEF(config);
+        _userRepo = userRepository;
         _mapper = new Mapper(new MapperConfiguration(cfg=>{
             cfg.CreateMap<UserToAddDto, User>();
         }));
@@ -26,29 +26,20 @@ public class UserControllerEF : ControllerBase
  
     public IEnumerable<User> GetUsers()
     {
-        IEnumerable<User> users = _ef.Users.ToList<User>();
+        IEnumerable<User> users = _userRepo.GetUsers();
         return users;
     }
 
     [HttpGet("GetUserEF/{userId}")]
     public User GetSingleUser(int userId)
     {
-
-    User? user = _ef.Users.Where(u => u.UserId == userId).FirstOrDefault<User>();
-    if (user != null)
-    {
-    return user;        
-    }
-    throw new Exception("User doesn't exist");
+        return _userRepo.GetSingleUser(userId);
     }
 
     [HttpPut("EditUserEF")]
     public IActionResult EditUser(User user)
     {
-        User? userEdit = _ef.Users
-        .Where(u => u.UserId == user.UserId)
-        .FirstOrDefault<User>();
-
+        User? userEdit = _userRepo.GetSingleUser(user.UserId);
         if(userEdit != null)
         {
         userEdit.FirstName = user.FirstName ;
@@ -56,7 +47,7 @@ public class UserControllerEF : ControllerBase
           userEdit.Email=  user.Email;
           userEdit.Gender = user.Gender;
           userEdit.Active = user.Active;
-          if(_ef.SaveChanges()>0)
+          if(_userRepo.SaveChanges())
           {
             return Ok();
           }
@@ -68,8 +59,8 @@ public class UserControllerEF : ControllerBase
         public IActionResult AddUser(UserToAddDto user)
     {
         User newUser = _mapper.Map<User>(user);
-          _ef.Add(newUser);
-        if(_ef.SaveChanges()>0)
+        _userRepo.AddEntity<User>(newUser);
+        if(_userRepo.SaveChanges())
         {
         return Ok();
         }
@@ -79,14 +70,12 @@ public class UserControllerEF : ControllerBase
     [HttpDelete("DeleteUserEF/{userId}")]
     public IActionResult DeleteUser(int userId)
     {
-        User? userDelete = _ef.Users
-        .Where(u => u.UserId == userId)
-        .FirstOrDefault<User>();
+        User? userDelete = _userRepo.GetSingleUser(userId);
 
         if(userDelete != null)
         {
-        _ef.Remove(userDelete);
-            if(_ef.SaveChanges()>0)
+        _userRepo.RemoveEntity<User>(userDelete);
+            if(_userRepo.SaveChanges())
                 {
                 return Ok();
                 }
@@ -99,7 +88,7 @@ public class UserControllerEF : ControllerBase
  
     public IEnumerable<UserJobInfo> GetUserJobInfo()
     {
-        IEnumerable<UserJobInfo> users = _ef.UserJobInfo.ToList<UserJobInfo>();
+        IEnumerable<UserJobInfo> users = _userRepo.GetUserJobInfo();
         return users;
     }
 }
