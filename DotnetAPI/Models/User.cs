@@ -15,13 +15,13 @@ namespace DotnetAPI{
             }
             if(LastName == null)
             {
-                FirstName = "";
+                LastName = "";
 }            if(Gender== null)
             {
-                FirstName = "";
+                Gender = "";
 }            if(Email== null)
             {
-                FirstName = "";
+                Email = "";
             }
         }
     }
