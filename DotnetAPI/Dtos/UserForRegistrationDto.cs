@@ -39,7 +39,7 @@ namespace DotnetAPI.Dtos{
             {
                 Gender = "";
             }
-                        if(JobTitle == null)
+            if(JobTitle == null)
             {
             JobTitle = "";
             }
