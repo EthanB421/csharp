@@ -11,11 +11,9 @@ namespace DotnetAPI.Controllers;
 [Route("[controller]")]
 public class UserCompleteController : ControllerBase
 {
-    DataContextDapper _dapper;
     IUserControllerService userService;
-    public UserCompleteController(IConfiguration config, IUserControllerService userService)
+    public UserCompleteController(IUserControllerService userService)
     {
-        _dapper = new DataContextDapper(config);
         this.userService = userService;
     }
 
@@ -37,22 +35,15 @@ public class UserCompleteController : ControllerBase
     [HttpPut("UpsertUser")]
     public IActionResult UpsertUser(UserComplete user)
     {
-        bool completed = userService.UpsertUser(user);
-        if(completed)
-        {
+        this.userService.UpsertUser(user);
         return Ok();
-        }
-        throw new Exception("Failed to Update User");
+        
     }
 
     [HttpDelete("DeleteUser/{userId}")]
     public IActionResult DeleteUser(int userId)
     {
-        bool isDeleted = userService.DeleteUser(userId);
-        if (isDeleted)
-        {
-            return Ok(); // HTTP 200 OK
-        }throw new Exception("Failed to delete user");
-        
+        this.userService.DeleteUser(userId);
+        return Ok(); // HTTP 200 OK
     }
 }

@@ -21,7 +21,30 @@ namespace DotnetAPI.Service
             sqlParameters.Add("@UserIdParameter", userId,DbType.Int32);
             return _dapper.ExecuteSqlWithParameters(sql, sqlParameters);
         }
-
+        public bool UpsertUser(UserComplete user)
+        {
+            string sql = @"EXEC TutorialAppSchema.spUser_Upsert
+                    @FirstName = @FirstNameParameter,
+                    @LastName= @LastNameParameter,
+                    @Email= @EmailParameter,
+                    @Gender= @GenderParameter,
+                    @Active= @ActiveParameter,
+                    @JobTitle= @JobTitleParameter,
+                    @Department= @DepartmentParameter,
+                    @Salary= @SalaryParameter,
+                    @UserId = @UserIdParameter";
+            DynamicParameters sqlParameters = new DynamicParameters();
+            sqlParameters.Add("@FirstNameParameter", user.FirstName, DbType.String);
+            sqlParameters.Add("@LastNameParameter", user.LastName, DbType.String);
+            sqlParameters.Add("@EmailParameter", user.Email, DbType.String);
+            sqlParameters.Add("@GenderParameter", user.Gender, DbType.String);
+            sqlParameters.Add("@ActiveParameter", user.Active, DbType.Boolean);
+            sqlParameters.Add("@JobTitleParameter", user.JobTitle, DbType.String);
+            sqlParameters.Add("@DepartmentParameter", user.Department, DbType.String);
+            sqlParameters.Add("@SalaryParameter", user.Salary, DbType.Decimal);
+            sqlParameters.Add("@UserIdParameter", user.UserId, DbType.Int32);
+            return _dapper.ExecuteSqlWithParameters(sql, sqlParameters);
+        }     
         public IEnumerable<UserComplete> GetUsers(int userId, bool isActive)
         {
             string sql = @"EXEC TutorialAppSchema.spUsers_Get";
@@ -51,30 +74,6 @@ namespace DotnetAPI.Service
         {
             return _dapper.LoadDataSingle<DateTime>("SELECT GETDATE()");
         }
-
-        public bool UpsertUser(UserComplete user)
-        {
-            string sql = @"EXEC TutorialAppSchema.spUser_Upsert
-                    @FirstName = @FirstNameParameter,
-                    @LastName= @LastNameParameter,
-                    @Email= @EmailParameter,
-                    @Gender= @GenderParameter,
-                    @Active= @ActiveParameter,
-                    @JobTitle= @JobTitleParameter,
-                    @Department= @DepartmentParameter,
-                    @Salary= @SalaryParameter,
-                    @UserId = @UserIdParameter";
-            DynamicParameters sqlParameters = new DynamicParameters();
-            sqlParameters.Add("@FirstNameParameter", user.FirstName, DbType.String);
-            sqlParameters.Add("@LastNameParameter", user.LastName, DbType.String);
-            sqlParameters.Add("@EmailParameter", user.Email, DbType.String);
-            sqlParameters.Add("@GenderParameter", user.Gender, DbType.String);
-            sqlParameters.Add("@ActiveParameter", user.Active, DbType.Boolean);
-            sqlParameters.Add("@JobTitleParameter", user.JobTitle, DbType.String);
-            sqlParameters.Add("@DepartmentParameter", user.Department, DbType.String);
-            sqlParameters.Add("@SalaryParameter", user.Salary, DbType.Decimal);
-            sqlParameters.Add("@UserIdParameter", user.UserId, DbType.Int32);
-            return _dapper.ExecuteSqlWithParameters(sql, sqlParameters);
-        }        
+   
     }
 }
